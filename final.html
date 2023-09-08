@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Global Warming Awareness</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+    }
+
+    #app {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      color: #333;
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      color: #555;
+      margin-top: 20px;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 5px;
+      margin-top: 10px;
+    }
+
+    button {
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      margin: 5px;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      resize: vertical;
+      margin-top: 10px;
+    }
+
+    ul {
+      list-style-type: disc;
+      margin-left: 20px;
+    }
+
+    li {
+      margin-bottom: 5px;
+    }
+
+    form {
+      margin-top: 20px;
+    }
+
+    label {
+      display: block;
+      color: #555;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+  </style>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+
+<body>
+
+  <div id="app">
+    <h1>Global Warming Awareness</h1>
+
+    <div>
+      {{ message }}
+      The average temperature of Earth has been steadily rising as a result of increased greenhouse gas emissions from
+      human activities like burning fossil fuels and deforestation. Rising sea levels put coastal areas at risk, extreme
+      weather events become more frequent, biodiversity is disrupted, and ecosystems find it difficult to adapt as a
+      result of this warming process. Water availability, agricultural patterns, public health, and economics are all
+      impacted. To alleviate these effects and promote global resilience against the rising challenges brought on by
+      global warming, urgent steps, such as cutting emissions and switching to sustainable practices, are essential.
+    </div>
+
+    <img v-bind:src="imageurl" alt="GlobalWarming">
+
+    <div id="Boolean">
+      <h2>Does Global Warming Affect You?</h2>
+      <button @click="selectOption = 'Yes'">Yes</button>
+      <button @click="selectOption = 'No'">No</button>
+
+      <div v-if="selectOption === 'Yes'">
+        <p><strong>It Affects You!</strong> You should take necessary steps.</p>
+      </div>
+      <div v-else-if="selectOption === 'No'">
+        <p><strong>That's Great!</strong> You are living in a Great Place.</p>
+      </div>
+    </div>
+
+    <div id="app2">
+      <button @click="toggleVisibility">Toggle Button</button>
+      <p v-show="isVisible">This is a toggled element.</p>
+    </div>
+
+    <img v-bind:src="imageurl2" alt="ShowImg" v-show="showDiv">
+
+    <h2>Factors Affecting Global Warming:</h2>
+    <div id="factorsGlobalWarming">
+      <ul>
+        <li v-for="factor in factorsGlobalWarming" :key="factor">{{ factor }}</li>
+      </ul>
+    </div>
+
+    <h2>Submit Feedback:</h2>
+    <form @submit.prevent="submitFeedback">
+      <label for="feedback">Your Feedback:</label>
+      <textarea v-model="feedback" id="feedback" rows="4"></textarea>
+      <br>
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+
+  <script>
+    const app = Vue.createApp({
+      data() {
+        return {
+          message: "Learn about the impacts of global warming and take action!",
+          isVisible: true,
+          selectOption: "",
+          imageurl: "https://images.nationalgeographic.org/image/upload/v1638892314/EducationHub/photos/tennessee-power-plant.jpg",
+          imageurl2: "https://www.conserve-energy-future.com/wp-content/uploads/2016/07/global-warming-burning-earth-burning.jpg",
+          showDiv: true,
+          factorsGlobalWarming: [
+            'Carbon emissions',
+            'Deforestation',
+            'Industrial pollution',
+            'Greenhouse gases',
+            'Fossil fuel consumption'
+          ],
+          feedback: ""
+        };
+      },
+      methods: {
+        toggleVisibility() {
+          this.isVisible = !this.isVisible;
+          this.showDiv = !this.showDiv;
+        },
+        submitFeedback() {
+          if (this.feedback.trim() !== "") {
+            alert("Feedback submitted: " + this.feedback);
+            this.feedback = "";
+          }
+        }
+      }
+    });
+
+    app.mount('#app');
+  </script>
+
+</body>
+
+</html>
